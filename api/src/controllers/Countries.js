@@ -20,7 +20,7 @@ const prechargeCountries = async () => {
         id: country.cca3,
         flags: country.flags.png, // Usamos .png que es más estable que el array [0]
         continents: country.continents[0],
-        capital: country.capital ? country.capital[0] : " ",
+        capital: (country.capital && country.capital.length > 0) ? country.capital[0] : "No capital",
         subregion: country.subregion || "No subregion",
         area: country.area,
         population: country.population,
