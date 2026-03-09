@@ -64,20 +64,17 @@ const prechargeCountries = async () => {
 
 // //?me trae la info de la base de datos
 const getAll = async (name) => {
-  // 1. Verificamos si hay países en la DB, si no, los cargamos SIEMPRE primero
   const count = await Country.count();
   if (count === 0) {
-    await prechargeCountries();
+    await prechargeCountries(); // Esto usa la URL de restcountries.com que ya tenés
   }
 
-  // 2. Ahora sí, hacemos la búsqueda normal
   const where = {};
   if (name) {
-    // Ojo aquí: name debería compararse contra la columna 'name'
     where.name = { [Op.iLike]: `%${name}%` }; 
   }
 
-  let countries = await Country.findAll({
+  return await Country.findAll({
     where: where,
     include: {
       model: Activity,
@@ -85,8 +82,6 @@ const getAll = async (name) => {
       through: { attributes: [] },
     },
   });
-
-  return countries;
 };
 
 //*Promise
