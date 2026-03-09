@@ -16,7 +16,7 @@ const prechargeCountries = async () => {
       return {
         name: country.name.common,
         id: country.cca3,
-        flags: country.flags[0],
+        flags: country.flags.png,
         continents: country.continents[0],
         capital: country.capital ? country.capital[0] : " ",
         subregion: country.subregion,
