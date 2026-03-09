@@ -22,7 +22,7 @@ const { conn } = require("./src/db.js");
 const { PORT=3001 } = process.env;
 
 // CAMBIO CLAVE: Cambiamos false por true para obligar a Sequelize a crear todo de cero
-conn.sync({ force: true }).then(() => {
+conn.sync({ force: false }).then(() => {
   server.listen(PORT, () => {
     console.log(`%s listening at ${PORT}`); 
   });
