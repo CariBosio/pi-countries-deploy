@@ -10,7 +10,7 @@ const { Op } = require("sequelize");
 
 const prechargeCountries = async () => {
   try {
-    let apiCountries = await axios.get("https://restcountries.com/v3/all");
+    let apiCountries = await axios.get("https://restcountries.com/v3.1/all");
 
     apiCountries = apiCountries.data.map((country) => {
       return {
