@@ -10,23 +10,32 @@ const { Op } = require("sequelize");
 
 const prechargeCountries = async () => {
   try {
-    let apiCountries = await axios.get("https://restcountries.com/v3.1/all");
+    // Agregamos ?fields= para que la API no nos bloquee por pedir demasiada info
+    const url = "https://restcountries.com/v3.1/all?fields=name,cca3,flags,continents,capital,subregion,area,population";
+    let apiCountriesResponse = await axios.get(url);
 
-    apiCountries = apiCountries.data.map((country) => {
+    const apiCountries = apiCountriesResponse.data.map((country) => {
       return {
         name: country.name.common,
         id: country.cca3,
-        flags: country.flags.png,
+        flags: country.flags.png, // Usamos .png que es más estable que el array [0]
         continents: country.continents[0],
         capital: country.capital ? country.capital[0] : " ",
-        subregion: country.subregion,
+        subregion: country.subregion || "No subregion",
         area: country.area,
         population: country.population,
       };
     });
-    await Country.bulkCreate(apiCountries); //guardar en DB - bulkCreate es una función de sequelize que Crea e inserta varias instancias de forma masiva.
+
+    await Country.bulkCreate(apiCountries); 
+    console.log("¡Países cargados exitosamente en Neon!");
   } catch (error) {
-    console.log(error);
+    // Esto nos va a mostrar el error real en los logs de Render si algo falla
+    if (error.response) {
+      console.log("Error de la API:", error.response.data);
+    } else {
+      console.log("Error de conexión:", error.message);
+    }
   }
 };
 
