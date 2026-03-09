@@ -1,0 +1,32 @@
+.buttonpage {
+  font-family: 'Kalam', cursive;
+  font-size: 15px;
+   
+  margin: 2px;
+  display: inline-block;
+  -webkit-appearance: none;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 5px;
+  width: 30px;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-clip: padding-box;
+  position: relative;
+  color: black;
+  cursor: pointer;
+  border-color: black;
+  color: #fff;
+  box-shadow: 0 0 40px 40px  #335d90  inset, 0 0 0 0  #335d90 ;
+  -webkit-transition: all 150ms ease-in-out;
+  transition: all 150ms ease-in-out;
+}
+.buttonpage:hover {
+  box-shadow: 0 0 10px 0  #335d90  inset, 0 0 10px 4px  #335d90 ;
+  color: black;
+}
+
+.buttonactive {
+  box-shadow: 0 0 10px 0  #335d90  inset, 0 0 10px 4px  #335d90 ;
+  color: black;
+}
